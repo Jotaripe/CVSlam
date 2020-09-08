@@ -12,18 +12,8 @@ De esta forma, se pretende explorar un entorno con un robot utilizando técnicas
 Se utilizarán dos máquinas, una raspberry pi 3B+ donde se instalará ROS y una máquina más potente como p
 
 ### Instalación de ROS 🔧
-
-En esta sección se detallarán los pasos necesarios para mantener, reiniciar o en general poner en funcionamiento el sistema.
-* 1.- El sistema operativo elegido para las raspberrys es Raspbian release 9.9 GNU/Linux codename: stretch. Instalado a través de Noobs_V3_1_1.
-* 2.- Normalmente se accederá a través de SSH o Escritorio remoto dependiendo del sistema operativo del cliente donde nos encontremos.
-* 3.- La librería controladora de la cámara es python-picamera. Instalada con el comando:
-```
-sudo apt-get install python-picamera
-```
-Nota: Antes de poner a funcionar la cámara es necesario activar el módulo de la raspberry: Camera. Disponible en: raspi_config
-* 4.- El sistema de transferencia de archivos será un servidor ftp, accesible a través de WinSCP en Windows y por línea de comandos y más accesible en Linux.
-* 5.- Es de vital importancia apagar las raspberrys por línea de comandos o desde la interfaz, jamás se hará desconectando la alimentación debido a la probable corrupción del sistema. Nota: Para paliar este problema se ha hecho una copia de seguridad con el sistema operativo listo para su uso.
-
+* 1.- Raspberry pi 3B+: https://emanual.robotis.com/docs/en/platform/turtlebot3/setup/#sbc-setup
+* 2.- Máquina remoto: https://emanual.robotis.com/docs/en/platform/turtlebot3/pc_setup/
 ### USO 🔧
 
 Guía sobre como usar el proyecto :
@@ -48,11 +38,18 @@ roslaunch turtlebot3_slam turtlebot3.launch slam_methods:=karto
 
 ```
 
-[EN CONSTRUCCIÓN]
+* 5.- Teleoperar el robot con:
+[Android] : https://emanual.robotis.com/docs/en/platform/turtlebot3/teleoperation/#android-app
 
-*
-*
-*
+[Teclado máquina remoto]
+```
+export TURTLEBOT3_MODEL=${TB3_MODEL}
+roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+```
+[Autónomo]
+```
+roslaunch turtlebot3_teleop turtlebot3_drive.launch
+```
 
 
 ## Autores ✒️
