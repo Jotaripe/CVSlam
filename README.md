@@ -26,28 +26,27 @@ Nota: Antes de poner a funcionar la cámara es necesario activar el módulo de l
 
 ### USO 🔧
 
-Guía sobre como usar el proyecto optovision:
+Guía sobre como usar el proyecto :
 
-* 1.- Encender cada una de las fuentes de alimentación, esto dará pie a la inicialización automática de cada una de las raspberrys, que inicializarán un servidor ssh, estas raspberrys están enroutadas por un router genérico, en este cao, tp-link, con lo que será necesario conectar las raspberrys por wifi o ethernet al router. Este servidor ssh será accedido a través de una máquina que recoja las imagenes tomadas por las cámaras y almacenadas en cada una de las raspberrys. Con lo que el proceso:
-  *  a) Encender fuentes
-  *  b) Colocar modelo
-  *  c) Tomar una imagen del modelo: [Ver script: "TomarImagenConFecha.py]. [En el futuro, interfaz].
-  *  c.2) Nótese que se debe ejecutar este script en cada una de las raspberrys, para ellos se utilizará xterm y cssh para                          *   conectarse a cada una de las raspberrys al mismo tiempo.
-  *  d) Transferir imágenes al host anfitrión a través de SCP. [Ver script: "TransferenciaDeImagenes.sh]
-  *  e) Cargar las imágenes en Metashape
-  *  f) Generar el modelo 3D. Insertar previamente los parámetros intrínsecos de cada cámara en Metashape.
-  *  g) Apagar mediante línea de comandos las raspberrys con "sudo shutdown now".
-  *  h) Apagar las fuentes del botón preparado para ello, y dejar el sistema listo para un nuevo uso.
+* 1.- Instalar ROS en la raspberry pi 3B+
+* 2.- Instalar ROS en la máquina remoto
+* 3.- Instalar paquetes y sus dependencias: uvc_camera [Raspberry], find_object_2d[Máquina remoto], Cartographer-ROS[Máquina remoto]
+* 4.- Iniciar ROS en raspberry y maquian remoto con:
+```
+roscore
+```
+* 4.- Iniciar los diferentes nodos con:
+[Raspberry]
+```
+rosrun uvc_camera uvc_camera_node
+roslaunch turtlebot3_bringup turtlebot3_robot.launch
+```
+[Máquina remoto]
+```
+rosrun find_object find_object_2d image:=image_raw
+roslaunch turtlebot3_slam turtlebot3.launch slam_methods:=karto
 
-* 2.- Interfaz
-    [Nota: ESTA INTERFAZ NO ESTÁ DISEÑADA PARA UN USO COMERCIAL]
-    - Sirva a modo de visualización de una interfaz profesional:
-    - La interfaz está basada en Tkinter que funciona sobre python 3.7+.
-    - Sobre ella se ejecutarán los scripts mencionados en esta guía: Apartado USO c) y d)
-    - Para ello se debe operar la interfaz en el punto USO b-c de esta misma guía. Aplicar el script de Toma de imagenes
-    - Aplicar el script Transferencia de imagenes que guardará la imagenes en la ruta especificada en el script.
-    
-
+```
 
 [EN CONSTRUCCIÓN]
 
@@ -58,7 +57,4 @@ Guía sobre como usar el proyecto optovision:
 
 ## Autores ✒️
 
-* **Javier Melero Rus** - *Supervisión*
 * **Jorge Rivas Pérez** - *Trabajo inicial*
-
-Todos los derechos reservados
